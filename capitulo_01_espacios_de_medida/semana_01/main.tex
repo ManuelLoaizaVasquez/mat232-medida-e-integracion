@@ -40,7 +40,7 @@
 
 \title{MAT232 Medida e Integraci\'on}
 \author{Manuel Loaiza Vasquez}
-\date{2021}
+\date{Abril 2021}
 
 \begin{document}
 
@@ -65,24 +65,45 @@
 \end{statement}
 
 \begin{proof}
+  \begin{enumerate}
+    \item Como $\mathcal{F}$ es un sigma \'algebra, $B^C \in \mathcal{F}$, por lo que $A \setminus B = A \cap B^C \in \mathcal{F}$.
+    \item De $(1)$ sabemos que $A \setminus B, B \setminus A$ $\in \mathcal{F}$, por lo que $A \Delta B = (A \setminus B) \cup (B \setminus A) \in \mathcal{F}$. 
+  \end{enumerate}
 \end{proof}
 
 \begin{statement}{2}
-  Sea $(X, \mathcal{F})$ un espacio medible y $E \subset X$, pruebe que
+  Sea $(X, \mathcal{F})$ un espacio medible y $E \subset \mathcal{F}$, pruebe que
   \begin{enumerate}
-    \item La colecci\'on $\{E \cap F : F \in \mathcal{F}\}$ es un sigma \'algebra sobre E.
+    \item La colecci\'on $G = \{E \cap F : F \in \mathcal{F}\}$ es un sigma \'algebra sobre $E$.
     \item La colecci\'on $\sigma(f) = \{f^{-1}(A) : A \in \mathcal{F}\}$ es un sigma \'algebra sobre $Y$, donde $f: Y \to X$.
-    \item El item (a) es consecuencia del item (b).
+    \item El item (1) es consecuencia del item (2).
   \end{enumerate}
 \end{statement}
 
 \begin{proof}
+  \begin{enumerate}
+    \item Verifiquemos que el conjunto $G$ satisface las tres propiedades de sigma \'algebra:
+      \begin{enumerate}
+        \item $X \in \mathcal{F}$ pues este \'ultimo es un sigma \'algebra en $X$, entonces $E = E \cap X \in G$ y tendr\'iamos que $G \neq \emptyset$.
+        \item Sea $(A_n)_{n \in \BN}$ en $G$. Tenemos que $A_n = E \cap F_n$, para alg\'un $F_n \in \mathcal{F}$. Luego $\cup_{n \in \BN} A_n = \cup_{n \in \BN} (E \cap F_n) = E \cup_{n \in \BN} F_n \in G$ pues $\cup_{n \in \BN} F_n \in \mathcal{F}$ por ser sigma \'algebra.
+        \item Sea $A = E \cap F$, para alg\'un $F \in \mathcal{F}$, tenemos que $A^C = E \setminus (E \cap F) = E \cap F^C \in G$, pues $F^C \in \mathcal{F}$ por ser sigma \'algebra.
+      \end{enumerate}
+      Finalmente, concluimos que $G$ es un sigma \'algebra.
+    \item Verifiquemos que $\sigma(f)$ satisface las tres propiedades de sigma \'algebra:
+      \begin{enumerate}
+        \item $\emptyset \in \sigma(f)$ pues $f^{-1}(\emptyset) = \emptyset$.
+        \item Sea $(B_n)_{n \in \BN}$ en $\sigma(f)$ tenemos que $\cup_{n \in \BN} B_n \in \sigma(f)$ pues $\cup_{n \in \BN} B_n = f^{-1}(\cup_{n \in \BN} A_n)$, con $B_n = f^{-1}(A_n)$. Afirmo esto pues $\cup_{n \in \BN} A_n \in \mathcal{F}$ pues es un sigma \'algebra y $f^{-1}(\cup_{n \in \BN} A_n) = \cup_{n \in \BN} f^{-1}(A_n)$.
+        \item Sea $B = f^{-1}(A) \in \sigma(f)$ tenemos que $B^C \in \sigma(f)$ pues $A^C \in \mathcal{F}$ por ser sigma \'algebra y $B^C = (f^{-1}(A))^C = f^{-1}(A^C)$.
+      \end{enumerate}
+      Finalmente, concluimos que $\sigma(f)$ es un sigma \'algebra.
+    \item Sea $f: E \subset Y \to X$ con $f(x) = x$ cumple con lo requerido pues dado un $F \in \mathcal{F}$ arbitrario, $f^{-1}(F) = E \cap F$.
+  \end{enumerate}
 \end{proof}
 
 \begin{statement}{3}
   Sea $X$ un conjunto, pruebe lo siguiente
   \begin{enumerate}
-    \item Si $(\mathcal{F}_{\lambda})_{\lambda \in L}$ es una familia arbitraria de sigma \'algebras sobre $X$, entonces $\cap_{\lambda \in L} \mathcal{F}$ es un sigma \'algebra sobre $X$.
+    \item Si $(\mathcal{F}_{\lambda})_{\lambda \in L}$ es una familia arbitraria de sigma \'algebras sobre $X$, entonces $\cap_{\lambda \in L} \mathcal{F}_{\lambda}$ es un sigma \'algebra sobre $X$.
     \item Si $\mathcal{C} \subset 2^X$, existe un sigma \'algebra $\mathcal{F}$ sobre $X$ tal que
       \begin{enumerate}
         \item $\mathcal{C} \subset \mathcal{F}$.
@@ -92,17 +113,35 @@
 \end{statement}
 
 \begin{proof}
+  \begin{enumerate}
+    \item Verifiquemos que $\cap_{\lambda \in L} \mathcal{F}_{\lambda}$ satisface las tres propiedades de sigma \'algebra:
+      \begin{enumerate}
+        \item $X \in \cap_{\lambda \in L} \mathcal{F}_{\lambda}$ pues $X \in \mathcal{F}_{\lambda}, \forall \lambda \in L$.
+        \item Sea $(A_n)_{n \in \BN}$ en $\cap_{\lambda \in L} \mathcal{F}_{\lambda}$, tenemos que $\cup_{n \in \BN} A_n \in \cap_{\lambda \in L} \mathcal{F}_{\lambda}$ pues dado un $n \in \BN$ y un $\lambda \in L$ se cumple que $A_n \in \mathcal{F}_{\lambda}$. Como $\mathcal{F}_{\lambda}$ es sigma \'algebra, $\cup_{n \in \BN} A_n \in \mathcal{F}_{\lambda}$ y como esto es cierto para todo $\lambda$ en $L$ entonces $\cup_{n \in \BN} A_n \in \cap_{\lambda \in L} \mathcal{F}_{\lambda}$.
+        \item Dado $A \in \cap_{\lambda \in L} \mathcal{F}_{\lambda}$, para todo $\lambda \in L$ tenemos que $A \in \mathcal{F}_{\lambda}$, lo cual implica que $A^C \in \mathcal{F}_{\lambda}$ por ser sigma \'algebra y por lo tanto $A^C \in \cap_{\lambda \in L} \mathcal{F}_{\lambda}$.
+      \end{enumerate}
+      Finalmente, concluimos que $\cap_{\lambda \in L} \mathcal{F}_{\lambda}$ es un sigma \'algebra.
+    \item Sea $(\mathcal{G}_{\lambda})_{\lambda \in L}$ la familia de todos los sigma \'algebra $\mathcal{G}_{\lambda}$ en $X$ y $\mathcal{C} \subset \mathcal{G}_{\lambda}$. Afirmo que $\mathcal{F} = \cap_{\lambda \in L} \mathcal{G}_{\lambda}$ cumple lo requerido pues $\mathcal{C} \subset \mathcal{F}$, $\mathcal{F} = \cap_{\lambda \in L} \mathcal{G}_{\lambda} \subset \mathcal{G}_{\lambda}$ y $\mathcal{F}$ es un sigma \'algebra debido al inciso (1).
+  \end{enumerate}
 \end{proof}
 
 \begin{statement}{4}
   Sea $X$ un conjunto, pruebe lo siguiente
   \begin{enumerate}
-    \item Si $A_1, A_2, \dots, A_n \subset X$ son disjuntos $2$ a $2$ y $\cup_{i = 1}^n A_i = X$, entonces $|\sigma(\{A_1, A_2, \dots, A_n\})| = 2^n$.
+    \item Si $A_1, A_2, \dots, A_n \subset X$ son disjuntos dos a dos y $\cup_{i = 1}^n A_i = X$, entonces $|\sigma(\{A_1, A_2, \dots, A_n\})| = 2^n$.
     \item Si $A_1, A_2, \dots, A_n \subset X$, entonces $\sigma(\{A_1, A_2, \dots, A_n\})$ es finito.
   \end{enumerate}
 \end{statement}
 
 \begin{proof}
+  \begin{enumerate}
+    \item Sea $A = \{A_{\theta_1} \cup \dots \cup A_{\theta_k} : 0 \leq k \leq n \land 1 \leq \theta_1 < \dots < \theta_k \leq n\}$. Afirmo que $A = \sigma(\{A_1, \dots, A_n)\})$.
+      Probar que $A \subset \sigma(A_1, \dots, A_n)$ es trivial, pues para $a = A_{\theta_1} \cup \dots \cup A_{\theta_k} \in \sigma(A_1, \dots A_n)$ por definici\'on de sigma \'algebra.
+      Ahora probemos que $\sigma(A_1, \dots, A_n) \subset A$.
+      Por contradicci\'on, supongamos que no lo fuera, entonces existe un $s \in \sigma(A_1, \dots, A_n)$ que no puede ser escrito como uni\'on de los conjuntos dados.
+      Sea $s = A_{\theta_1} \cup \dots \cup A_{\theta_k} \cup B$,
+      donde $B$ es el conjunto de elementos tales que no existe $i$ tal que $A_i \subset B$.
+  \end{enumerate}
 \end{proof}
 
 \begin{statement}{5}
