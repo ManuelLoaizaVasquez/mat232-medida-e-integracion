@@ -1,4 +1,4 @@
-\documentclass{article}
+documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage{amsfonts,latexsym,amsthm,amssymb,amsmath,amscd,euscript}
 \usepackage{mathtools}
@@ -141,6 +141,7 @@
       Por contradicci\'on, supongamos que no lo fuera, entonces existe un $s \in \sigma(A_1, \dots, A_n)$ que no puede ser escrito como uni\'on de los conjuntos dados.
       Sea $s = A_{\theta_1} \cup \dots \cup A_{\theta_k} \cup B$,
       donde $B$ es el conjunto de elementos tales que no existe $i$ tal que $A_i \subset B$.
+      Como $\cup_{n \in \BN} A_i = X$, entonces $B = A_{\alpha_1} \cup \dots A_{\alpha_m}$.
   \end{enumerate}
 \end{proof}
 
@@ -163,13 +164,31 @@
   \begin{enumerate}
     \item Si $A \subset B$, entonces $\mu(A) \leq \mu(B)$.
     \item Si $A \subset B$ y $\mu(A) < \infty$, entonces $\mu(B \setminus A) = \mu(B) - \mu(A)$.
-    \item $\mu(A \cup B) + \mu(A \cup B) = \mu(A) + \mu(B)$.
+    \item $\mu(A \cup B) + \mu(A \cap B) = \mu(A) + \mu(B)$.
     \item Si $B_n \downarrow B$ y $\mu(B_1) < \infty$, entonces $\mu(B) = \inf_{n \in \BN} \mu(B_n)$.
     \item $\mu(\cup_{n \in \BN} A_n) \leq \sum_{n \in \BN} \mu(A_n)$.
   \end{enumerate}
 \end{statement}
 
 \begin{proof}
+  \begin{enumerate}
+    \item Escribimos $B = A \cup (B \setminus A)$. Como $\mu$ es una medida tenemos y los conjuntos son disjuntos tenemos
+      $\mu(A) + \mu(B \setminus A) = \mu(B)$ lo cual implica $\mu(A) \leq \mu(B)$.
+    \item Del inciso (1), como $\mu(A) < \infty$ podemos reordenar la expresi\'on como $\mu(B \setminus A) = \mu(B) - \mu(A)$.
+    \item Manipulamos las expresiones utilizando conjuntos disjuntos dos a dos
+      \begin{align*}
+        \mu(A \cup B) &= \mu(A \setminus B) + \mu(A \cap B) + \mu(B \setminus A)\\
+        \mu(A \cup B) + \mu(A \cap B) &= (\mu(A \setminus B) + \mu(A \cap B)) + (\mu(B \setminus A) + \mu(A \cap B))\\
+        \mu(A \cup B) + \mu(A \cap B) &= \mu(A) + \mu(B).
+      \end{align*}
+    \item %TODO
+    \item Sea $(B_n)_{n \in \BN}$ en $\mathcal{F}$ con $B_i = \cup_{j = 1}^i A_j$.
+      Tenemos que $B_n \uparrow \cup_{n \in \BN} A_n$ por lo que $\mu(\cup_{n \in \BN} A_n) = \lim_{n \to \infty} \mu(B_n) = \lim_{n \to \infty} \mu(\cup_{i = 1}^n A_n)$.
+      Probemos por inducci\'on que $\mu(\cup_{i = 1}^n A_i) \leq \sum_{i = 1}^n \mu(A_i)$. Para $n = 1$ es trivial.
+      Para $n = 2$ podemos expresar $\mu(A_1 \cup A_2) = \mu(A_1) + \mu(A_2 \setminus A_1) \leq \mu(A_1) + \mu(A_2)$ pues $A_2 \setminus A_1 \subset A_2$.
+      Supongamos que se cumple para un $n \geq 2$, verificar que se cumple para $n + 1$ es trivial usando el mismo argumento utilizado para $n = 2$ puesto que la uni\'on de los $n$ primeros conjuntos la podemos tomar como un solo conjunto.
+      Finalmente, por estabilidad de l\'imites tenemos $\lim_{n \to \infty} \mu(\cup_{i = 1}^n A_i) \leq \lim_{n \to \infty} \sum_{i = 1}^n \mu(A_i)$ obteniendo $\mu(\cup_{n \in \BN} A_n) \leq \sum_{n \in \BN} \mu(A_i)$.
+  \end{enumerate}
 \end{proof}
 
 \begin{statement}{8}
