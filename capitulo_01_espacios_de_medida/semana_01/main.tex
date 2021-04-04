@@ -1,4 +1,4 @@
-documentclass{article}
+\documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage{amsfonts,latexsym,amsthm,amssymb,amsmath,amscd,euscript}
 \usepackage{mathtools}
@@ -135,13 +135,15 @@ documentclass{article}
 
 \begin{proof}
   \begin{enumerate}
-    \item Sea $A = \{A_{\theta_1} \cup \dots \cup A_{\theta_k} : 0 \leq k \leq n \land 1 \leq \theta_1 < \dots < \theta_k \leq n\}$. Afirmo que $A = \sigma(\{A_1, \dots, A_n)\})$.
-      Probar que $A \subset \sigma(A_1, \dots, A_n)$ es trivial, pues para $a = A_{\theta_1} \cup \dots \cup A_{\theta_k} \in \sigma(A_1, \dots A_n)$ por definici\'on de sigma \'algebra.
-      Ahora probemos que $\sigma(A_1, \dots, A_n) \subset A$.
-      Por contradicci\'on, supongamos que no lo fuera, entonces existe un $s \in \sigma(A_1, \dots, A_n)$ que no puede ser escrito como uni\'on de los conjuntos dados.
-      Sea $s = A_{\theta_1} \cup \dots \cup A_{\theta_k} \cup B$,
-      donde $B$ es el conjunto de elementos tales que no existe $i$ tal que $A_i \subset B$.
-      Como $\cup_{n \in \BN} A_i = X$, entonces $B = A_{\alpha_1} \cup \dots A_{\alpha_m}$.
+    \item Sea $A = \{A_{\alpha_1} \cup \dots \cup A_{\alpha_k} : 0 \leq k \leq n \land 1 \leq \alpha_1 < \dots < \alpha_k \leq n\}$. Afirmo que $A = \sigma(\{A_1, \dots, A_n)\})$.
+      Probar que $A \subset \sigma(A_1, \dots, A_n)$ es trivial, pues para $a = A_{\alpha_1} \cup \dots \cup A_{\alpha_k} \in \sigma(A_1, \dots A_n)$ por definici\'on de sigma \'algebra.
+      Ahora probemos que $\sigma(\{A_1, \dots, A_n\}) \subset A$.
+      Probar\'e que $A$ es un sigma \'algebra. En caso esto sea cierto, el sigma \'algebra generado por los conjuntos $A_1, \dots, A_n$ estar\'ia contenido en $A$ por definici\'on.
+      Trivialmente $\emptyset \in A$ para $k = 0$.
+      Luego, dado $(a_n)_{n \in \BN}$ en $A$, como $a_i = A_{\theta_{i_1}} \cup \dots \cup A_{\theta_{i_{l_i}}}$, entonces $\cup_{n \in \BN} a_n = A_{\delta_1} \cup \dots \cup A_{\delta_l} \in A$.
+      Finalmente, dado $a \in A$ con $a = A_{\beta_1} \cup \dots \cup A_{\beta_m}$, $a^C = A_{\gamma_1} \cup \dots \cup A_{\gamma_p}$, donde $\{\beta_1, \dots, \beta_m, \gamma_1, \dots, \gamma_p\}$ es una permutaci\'on de $\{1, \dots, n\}$, pues $a \cup a^C = X = \cup_{i = 1}^n A_i$.
+      $A$ es sigma \'algebra y $\{A_1, \dots, A_n\} \subset A$, entonces $\sigma(\{A_1, \dots, A_n\}) \subset A$.
+      De esta manera, obtenemos lo solicitado gracias a que $\sigma(\{A_1, \dots, A_n\}) = A$ y la cardinalidad de $A = 2^n$.
   \end{enumerate}
 \end{proof}
 
@@ -181,7 +183,7 @@ documentclass{article}
         \mu(A \cup B) + \mu(A \cap B) &= (\mu(A \setminus B) + \mu(A \cap B)) + (\mu(B \setminus A) + \mu(A \cap B))\\
         \mu(A \cup B) + \mu(A \cap B) &= \mu(A) + \mu(B).
       \end{align*}
-    \item %TODO
+    \item Santiago
     \item Sea $(B_n)_{n \in \BN}$ en $\mathcal{F}$ con $B_i = \cup_{j = 1}^i A_j$.
       Tenemos que $B_n \uparrow \cup_{n \in \BN} A_n$ por lo que $\mu(\cup_{n \in \BN} A_n) = \lim_{n \to \infty} \mu(B_n) = \lim_{n \to \infty} \mu(\cup_{i = 1}^n A_n)$.
       Probemos por inducci\'on que $\mu(\cup_{i = 1}^n A_i) \leq \sum_{i = 1}^n \mu(A_i)$. Para $n = 1$ es trivial.
