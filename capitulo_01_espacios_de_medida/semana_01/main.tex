@@ -143,7 +143,7 @@
       Luego, dado $(a_n)_{n \in \BN}$ en $A$, como $a_i = A_{\theta_{i_1}} \cup \dots \cup A_{\theta_{i_{l_i}}}$, entonces $\cup_{n \in \BN} a_n = A_{\delta_1} \cup \dots \cup A_{\delta_l} \in A$.
       Finalmente, dado $a \in A$ con $a = A_{\beta_1} \cup \dots \cup A_{\beta_m}$, $a^C = A_{\gamma_1} \cup \dots \cup A_{\gamma_p}$, donde $\{\beta_1, \dots, \beta_m, \gamma_1, \dots, \gamma_p\}$ es una permutaci\'on de $\{1, \dots, n\}$, pues $a \cup a^C = X = \cup_{i = 1}^n A_i$.
       $A$ es sigma \'algebra y $\{A_1, \dots, A_n\} \subset A$, entonces $\sigma(\{A_1, \dots, A_n\}) \subset A$.
-      De esta manera, obtenemos lo solicitado gracias a que $\sigma(\{A_1, \dots, A_n\}) = A$ y la cardinalidad de $A = 2^n$.
+      De esta manera, obtenemos lo solicitado gracias a que $\sigma(\{A_1, \dots, A_n\}) = A$ y la cardinalidad de $A$ es $2^n$.
     \item Sea $A = \{\cap_{i = 1}^{n} A_{i, j} : j \in \{0, 1\}$, donde $j = 0$ significa que se toma dicho conjunto y $j = 1$ el complemento de dicho conjunto$\}$.
       $A$ es disjunto dos a dos (si algunos de los elementos iniciales est\'a repetido, tomamos solo uno de ellos) y $\cup_{a \in A} a = X$.
       De la secci\'on (1), $|\sigma(A)|$ es finito y como $\{A_1, \dots, A_n\} \subset \sigma(A)$, entonces $\sigma(\{A_1, \dots, A_n\}) \subset \sigma(A)$ y por lo tanto tambi\'en es finito.
@@ -186,7 +186,15 @@
         \mu(A \cup B) + \mu(A \cap B) &= (\mu(A \setminus B) + \mu(A \cap B)) + (\mu(B \setminus A) + \mu(A \cap B))\\
         \mu(A \cup B) + \mu(A \cap B) &= \mu(A) + \mu(B).
       \end{align*}
-    \item Santiago
+    \item Tenemos que $B_1 \setminus \cap_{n \in \BN} B_n = B_1 \cap (\cap_{n \in \BN} B_n)^C = B_1 \cap (\cup_{n \in \BN} B_n^C) = \cup_{n \in \BN} (B_1 \cap B_n^C) = \cup_{n \in \BN} (B_1 \setminus B_n)$ y como $B_n \downarrow B$, entonces $\cup_{n \in \BN} (B_1 \setminus B_n) = B_1 \setminus B_n$.
+      De esta manera, como $\mu(B_1) < \infty$ tenemos
+      \begin{align*}
+        \mu(B_1 \setminus \cap_{n \in \BN} B_n) &= \mu(\cup_{n \in \BN} B_1 \setminus B_n)\\
+        \mu(B_1) - \mu(\cap_{n \in \BN} B_n) &= \lim_{n \to \infty} \mu(B_1 \setminus B_n)\\
+        \mu(B_1) - \mu(\cap_{n \in \BN} B_n) &= \mu(B_1) - \lim_{n \to \infty} \mu(B_n)\\
+        \mu(\cap_{n \in \BN} B_n) &= \lim_{n \to \infty} \mu(B_n)\\
+        &= \inf_{n \in \BN} \mu(B_n).
+      \end{align*}
     \item Sea $(B_n)_{n \in \BN}$ en $\mathcal{F}$ con $B_i = \cup_{j = 1}^i A_j$.
       Tenemos que $B_n \uparrow \cup_{n \in \BN} A_n$ por lo que $\mu(\cup_{n \in \BN} A_n) = \lim_{n \to \infty} \mu(B_n) = \lim_{n \to \infty} \mu(\cup_{i = 1}^n A_n)$.
       Probemos por inducci\'on que $\mu(\cup_{i = 1}^n A_i) \leq \sum_{i = 1}^n \mu(A_i)$. Para $n = 1$ es trivial.
