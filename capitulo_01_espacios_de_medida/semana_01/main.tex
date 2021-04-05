@@ -257,5 +257,15 @@
 \end{statement}
 
 \begin{proof}
+  Tenemos que $A_i \subset \cup_{n \in \BN} A_n \subset \Omega$ por lo que $1 = \mathbb{P}(A_i) \leq \mathbb{P}(\cup_{n \in \BN} A_n) \leq \mathbb{P}(\Omega) = 1$ con $i \in \BN$.
+  Por el principio de inclusi\'on exclusi\'on tenemos que $\mathbb{P}(\cup_{i = 1}^n A_i) = \sum \mathbb{P}(A_{1, i_1} \cap \dots \cap A_{n, i_n})$
+  donde $i_j$ puede valer $0$ o $1$, en donde el primero representa al conjunto original y el segundo a su complemento, asumiendo que todos los conjuntos son distintos.
+  En caso haya m\'as de un $A_j$ igual, escogemos solo uno de ellos.
+  Asimismo, $\mathbb{P}(A_j^C) = \mathbb{P}(\Omega \setminus A_j) = \mathbb{P}(\Omega) - \mathbb{P}(A_j) = 0$.
+  Adem\'as, $(A_{1, i_1} \cap \dots \cap A_{j, 1} \cap \dots \cap A_{n, i_n}) \subset A_{j, 1} = A_j^C$, por lo que
+  $0 \leq \mathbb{P}(A_{1, i_1} \cap \dots \cap A_{j, 1} \cap \dots \cap A_{n, i_n}) \leq \mathbb{P}(A_j^C) = 0$ obteniendo
+  $\mathbb{P}(A_{1, i_1} \cap \dots \cap A_{j, 1} \cap \dots \cap A_{n, i_n}) = 0$.
+  Para llevar esta idea a un caso enumerable infinito, basta con separar la uni\'on en una uni\'on disjunta entre la intersecci\'on de todos los conjuntos originales y todos conjuntos restantes, los cuales se intersectan con al menos el complemento de alg\'un conjunto inicial, los cuales siempre tienen medida cero.
+  De esta manera solo sobrevivir\'ia $1 = \mathbb{P}(\cup_{n \in \BN} A_n) = \mathbb{P}(\cap_{n \in \BN} A_n)$.
 \end{proof}
 \end{document}
