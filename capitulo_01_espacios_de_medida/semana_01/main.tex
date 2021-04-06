@@ -53,7 +53,9 @@
 \vspace*{0.15in}
 
 \begin{framed}
-  Esta es una plantilla en \LaTeX. Util\'izala en tus listas de ejercicios, notas de clases y mucho m\'as.
+  Solucionario de la Tarea 1 que abarca los temas de la Semana 1 del curso de Medida e Integraci\'on
+  de la especialidad de Matem\'aticas de la Facultad de Ciencias e Ingenier\'ias
+  dictado por el profesor Johel Beltr\'an durante el ciclo $2021-1$.
 \end{framed}
 
 \begin{statement}{1}
@@ -216,6 +218,14 @@
 \end{statement}
 
 \begin{proof}
+  Sea $(A_n)_{n \in \BN}$ en $\mathcal{F}$ disjuntos dos a dos. Quiero probar que $\mu(\cup_{n \in \BN} A_n) = \sum_{n \in \BN} \mu(A_n)$.
+  Por la $\sigma$-subaditividad, tenemos $\mu(\cup_{n \in \BN} A_n) \leq \sum_{n \in \BN} \mu(A_n)$.
+  Basta probar $\mu(\cup_{n \in \BN} A_n) \geq \sum_{n \in \BN} \mu(A_n)$.
+  Dado un $j \in \BN$ fijo pero arbitrario, tenemos $\cup_{i = 1}^j A_i \subset \cup_{n \in \BN} A_n$.
+  Combinamos esto con la aditividad para obtener
+  $\sum_{i = 1}^j \mu(A_i) = \mu(\cup_{i = 1}^j A_i) \leq \mu(\cup_{n \in \BN} A_n)$.
+  Como se cumple para todo $j \in BN$, por estabilidad de l\'imites tenemos.
+  $\mu(\cup_{n \in \BN} A_n) \leq \sum_{n \in \BN} \mu(A_n)$ lo cual nos permite obtener la igualdad buscada.
 \end{proof}
 
 \begin{statement}{10}
@@ -231,6 +241,40 @@
 \end{statement}
 
 \begin{proof}
+  Primero probemos la ida:
+  \begin{enumerate}
+    \item Por definici\'on, $\mu(\emptyset) = 0$.
+    \item Dada $(A_n)_{n \in \BN}$ en $\mathcal{F}$ donde los elementos de la familia son disjuntos dos a dos.
+      Sea $B_i = \cup_{j = 1}^i A_i$.
+      Tenemos que $B_i \uparrow \cup_{n \in \BN} A_n$.
+      Como estamos en un espacio de medida, $\mu(B_i) \uparrow \mu(\cup_{n \in \BN} A_n)$.
+      De acuerdo a nuestra definici\'on de medida para una cantidad finita de conjuntos disjuntos dos a dos tendr\'iamos
+      $\sum_{i = 1}^n \mu(A_i) \uparrow \mu(\cup_{n \in \BN} A_n)$ lo cual equivale a escribir $\lim_{n \to \infty} \sum_{i = 1}^n \mu(A_i) = \sum_{n \in \BN} \mu(A_n) = \mu(\cup_{n \in \BN} A_n)$.
+  \end{enumerate}
+  Ahora probemos la vuelta:
+  \begin{enumerate}
+    \item De acuerdo a la definici\'on propuesta, $\mu(\emptyset) = 0$.
+    \item Dados $A_1, \dots, A_n$ en $\mathcal{F}$. Defino $B_i = A_i$ para $i \leq n$ y $B_i = \emptyset$ en otro caso.
+      Tenemos que $\mu(\cup_{i = 1}^n A_n) = \mu(\cup_{n \in \BN} B_n) = \sum_{n \in \BN} \mu(B_i) = \sum_{i \leq n} \mu(A_n) + \sum_{i > n} \mu(\emptyset) = \sum_{i = 1}^n \mu(A_i)$.
+    \item Sea $(A_n)_{n \in BN}$ en $\mathcal{F}$ tal que $A_n \uparrow A$.
+      Sea
+      \[
+        B_i =
+        \begin{cases}
+          A_1 & \text{si $i = 1$}\\
+          A_i \setminus A_{i - 1} & \text{en otro caso.}
+        \end{cases}
+      \]
+      Como $A_i = \cup_{j = 1}^i B_i$, entonces $\cup_{n \in \BN} B_n = \cup_{n \in \BN} A_n = A$.
+      Luego, nos aprovechamos de $B_i \cap B_j = \emptyset$ para obtener
+      \begin{align*}
+        \mu(A) &= \mu(\cup_{n \in \BN} B_n)\\
+        &= \sum_{n \in \BN} \mu(B_i)\\
+        &= \lim_{n \to \infty} \sum_{i = 1}^n \mu(B_i)\\
+        &= \lim_{n \to \infty} \mu(B_1 \cup \dots \cup B_n)\\
+        &= \lim_{n \to \infty} \mu(A_n).
+      \end{align*}
+  \end{enumerate}
 \end{proof}
 
 \begin{statement}{11}
@@ -243,6 +287,7 @@
 \end{statement}
 
 \begin{proof}
+  Trivial.
 \end{proof}
 
 \begin{statement}{12}
@@ -250,6 +295,7 @@
 \end{statement}
 
 \begin{proof}
+  Teorema $\pi - \lambda$.
 \end{proof}
 
 \begin{statement}{13}
