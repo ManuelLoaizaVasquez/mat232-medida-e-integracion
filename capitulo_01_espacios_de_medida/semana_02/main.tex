@@ -1,0 +1,307 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts,latexsym,amsthm,amssymb,amsmath,amscd,euscript}
+\usepackage{mathtools}
+\usepackage{framed}
+% Descomentar fullpage cuando se quiera utilizar menos margen horizontal
+%\usepackage{fullpage}
+\usepackage{hyperref}
+    \hypersetup{colorlinks=true,citecolor=blue,urlcolor =black,linkbordercolor={1 0 0}}
+
+\newenvironment{statement}[1]{\smallskip\noindent\color[rgb]{1.00,0.00,0.50} {\bf #1.}}{}
+\allowdisplaybreaks[1]
+
+% Comandos para teoremas, definiciones, ejemplos, lemas, etc. para sus respectivos body types.
+\renewcommand*{\proofname}{Prueba}
+\renewcommand{\contentsname}{Contenido}
+
+\newtheorem{theorem}{Teorema}
+\newtheorem*{proposition}{Proposici\'on}
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{corollary}[theorem]{Corolario}
+\newtheorem{conjecture}[theorem]{Conjetura}
+\newtheorem*{postulate}{Postulado}
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definici\'on}
+\newtheorem{example}[theorem]{Ejemplo}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Observaci\'on}
+\newtheorem*{notation}{Notaci\'on}
+\newtheorem*{note}{Nota}
+
+% Define tus comandos para hacer la vida más fácil.
+\newcommand{\BR}{\mathbb R}
+\newcommand{\BC}{\mathbb C}
+\newcommand{\BF}{\mathbb F}
+\newcommand{\BQ}{\mathbb Q}
+\newcommand{\BZ}{\mathbb Z}
+\newcommand{\BN}{\mathbb N}
+
+\title{MAT232 Medida e Integraci\'on}
+\author{Manuel Loaiza Vasquez}
+\date{Abril 2021}
+
+\begin{document}
+
+\maketitle
+
+\vspace*{-0.25in}
+\centerline{Pontificia Universidad Cat\'olica del Per\'u}
+\centerline{Lima, Per\'u}
+\centerline{\href{mailto:manuel.loaiza@pucp.edu.pe}{{\tt manuel.loaiza@pucp.edu.pe}}}
+\vspace*{0.15in}
+
+\begin{framed}
+  Solucionario de la Tarea 2 que abarca los temas de las Semanas 2 - 3 del curso
+  Medida e Integraci\'on de la especialidad de Matem\'aticas de la Facultad de
+  Ciencias e Ingenier\'ias dictado por el profesor Johel Beltr\'an
+  durante el ciclo $2021-1$.
+\end{framed}
+
+\begin{defn}[Sigma Álgebra de Borel]
+Sea $\mathcal{O}_m$ la colección formada por los abiertos de $\mathbb{R}^m$.
+Definiremos como $\sigma$-álgebra de Borel al sigma algebra generado por
+$\mathcal{O}_m$. Es decir,  $\mathcal{B}_m$ = $\sigma(\mathcal{O}_m)$.
+Además a los elementos de $\mathcal{B}_m$ se les denominará Borelianos o Borel
+medibles.
+\end{defn}
+
+\begin{statement}{1}
+Denotemos por $\mathcal{K}_m$ a la colección de compactos de $\mathbb{R}^m$ y
+por $\mathcal{C}_m$ a la colección de cerrados de $\mathbb{R}^m$.
+\begin{enumerate}
+  \item Pruebe que $\mathcal{B}_m$ = $\sigma(\mathcal{K}_m)$
+  \item Pruebe que $\mathcal{B}_m$ = $\sigma(\mathcal{C}_m)$
+\end{enumerate}
+\end{statement}
+
+\begin{proof}
+Primero probemos el siguiente lema.
+  \begin{lemma}
+    Se cumple que $\sigma(\mathcal{K}_m) = \sigma(\mathcal{C}_m)$.
+  \end{lemma}
+  \begin{proof}
+    Tenemos que $\mathcal{K}_m \subset \sigma(\mathcal{C}_m)$ trivialmente
+    ya que todo compacto es cerrado, por lo que
+    $\sigma(\mathcal{K}_m) \subset \sigma(\mathcal{C}_m)$.
+    Ahora probemos que $\mathcal{C}_m \subset \sigma(\mathcal{K}_m)$.
+    Sea $c \in C_m$, escribamos $c = c \cap \BR^m$. Asimismo, $(A_n)_{n \in \BZ}$
+    con $A_n = [n, n + 1] \times \dots \times [n, n + 1]$ cumple que
+    $\cup_{n \in \BZ} A_n = \BR^m$. De esta manera tenemos
+    $c = c \cap \cup_{n \in \BZ} A_n = \cup_{n \in \BZ} (c \cap A_n)$.
+    Debido a que la intersecci\'on de un conjunto cerrado con un conjunto cerrado
+    y acotado es un conjunto cerrado y acotado, entonces
+    $c \cap A_n$ es cerrado y acotado y $\cup_{n \in \BZ} (c \cap A_n)
+    \in \mathcal{K}_m$. As\'i, conseguimos $\sigma(\mathcal{C}_m) \subset \sigma(\mathcal{K}_m)$.
+    Ahora podemos concluir que $\sigma(\mathcal{C}_m) = \sigma(\mathcal{K}_m)$.
+  \end{proof}
+  Para poder rematar el teorema, probemos que
+  $\sigma(\mathcal{O}_m) = \sigma(\mathcal{C}_m)$.
+  Est\'a claro que $\mathcal{O}_m \subset \sigma(\mathcal{C}_m)$ pues dado
+  un conjunto abierto $o \in \mathcal{O}_m$, $o^C$ es un conjunto cerrado.
+  $o^C \in \sigma(\mathcal{C}_m)$ y por ser $\sigma$-\'algebra, tenemos que
+  $(o^C)^C = o \in \sigma(\mathcal{C}_m)$.
+  As\'i, $\sigma(\mathcal{O}_m) \subset \sigma(\mathcal{C}_m)$. Como el
+  complemento de un conjunto cerrado es un conjunto abierto, entonces probar
+  $\sigma(\mathcal{C}_m) \subset \sigma(\mathcal{O}_m)$ se realiza de manera
+  an\'aloga.
+  Finalmente podemos concluir que $\mathcal{B}_m = \sigma(\mathcal{O}_m) =
+  \sigma(\mathcal{C}_m) = \sigma(\mathcal{K}_m)$.
+\end{proof}
+
+\begin{statement}{2}
+  Denotemos por $\mathcal{J}_m^o$ a la colección de bloques abiertos de
+  $\mathbb{R}^m$, por $\mathcal{J}_m$ a la de semiabiertos (producto de
+  intervalos abiertos por derecha y cerrados por izquierda),
+  por $\mathcal{J}_{m,q}^o$ a la de abiertos con extremos racionales;
+  y por $\mathcal{J}_{m,q}$ a la de semiabiertos con extremos racionales.
+  Pruebe que  $\mathcal{B}_m$ = $\sigma(\mathcal{J}_m^o)$ =
+  $\sigma(\mathcal{J}_m)$ = $\sigma(\mathcal{J}_{m,q}^o)$ =
+  $\sigma(\mathcal{J}_{m,q})$.
+\end{statement}
+
+\begin{proof}
+\end{proof}
+
+\begin{statement}{3}
+  Denote por $\mathcal{R} = \{B_1 \times B_2 : B_1, B_2 \in \mathcal{B}_1\}$.
+  Pruebe lo siguiente:
+  \begin{enumerate}
+    \item Si $B_1, B_2 \in \mathcal{B}_1$, entonces $B_1 \times B_2 \in \mathcal{B}_2$.
+    \item Concluya que $\sigma(\mathcal{R}) = \mathcal{B}_2$.
+  \end{enumerate}
+\end{statement}
+
+\begin{proof}
+\end{proof}
+
+\begin{statement}{4}
+  Sea $F: \BR \to \BR$ una funci\'on creciente y continua por derecha.
+  Pruebe que la aplicaci\'on
+  \[
+    \mu_F((a, b]) = F(b) - F(a), \text{ para todo } a, b \in \BR \text{ tal que } a < b
+  \]
+  tiene una \'unica extensi\'on a medida $\nu_F$ sobre los borelianos.
+\end{statement}
+
+\begin{proof}
+\end{proof}
+
+\begin{defn}[Espacio de Medida Completo]
+  Sea $(X, \mathcal{F}, \mu)$ un espacio de medida. Decimos que este es completo
+  si todo subconjunto de un medible de medida cero es tambi\'en medible.
+\end{defn}
+
+\begin{statement}{5}
+  Sea $(X, \mathcal{F}, \mu)$ un espacio de medida y sea
+  \[
+    N = \{E \subset X : \text{ existe } B \in \mathcal{F} \text{ con }
+    E \subset B \text{ y } \mu(B) = 0\}.
+  \]
+  Pruebe lo siguiente:
+  \begin{enumerate}
+    \item La familia de subconjuntos de $X$
+    \[
+      \widetilde{\mathcal{F}}= \{A = B \cup E : B \in \mathcal{F} \text{ y } E \in N\}  
+    \]
+    es un $\sigma$-\'algebra sobre $X$ que contiene a $\mathcal{F}$.
+    \item Si $B_1, B_2 \in \mathcal{F}$ y $E_1, E_2 \in N$ son tales que
+    que $B_1 \cup E_1 = B_2 \cup E_2$, entonces $\mu(B_1) = \mu(B_2)$.
+    \item Existe una \'unica medida $\widetilde{\mu}$ en el espacio medible
+    $(X, \widetilde{\mathcal{F}})$ que extiende a $\mu$; es decir,
+    $\widetilde{\mu}(A) = \mu(A)$ para todo $A \in \mathcal{F}$.
+  \end{enumerate}
+  Al espacio de medida $(X, \widetilde{\mathcal{F}}, \widetilde{\mu})$ se le
+  denomina la compleci\'on de $(X, \mathcal{F}, \mu)$.
+\end{statement}
+
+\begin{proof}
+\end{proof}
+
+\begin{defn}[Colecci\'on $G_{\delta}$]
+  Decimos que un conjunto $G \subset \BR^m$ esta en $G_{\delta}$ cuando $G$
+  puede ser expresado como intersecci\'on numerable de conjuntos abiertos debe
+  $\BR^m$.
+\end{defn}
+
+\begin{statement}{6}
+  Sea $(\BR^m, \mathcal{L}, m)$ y $A \subset \BR^m$.
+  Pruebe que las siguientes afirmaciones son equivalentes:
+  \begin{enumerate}
+    \item $A \in \mathcal{L}$.
+    \item Para todo $\epsilon$ positivo podemos encontrar un abuerto $U$ tal
+    que $A \subset U$ y $m(U \setminus A) < \epsilon$.
+  \end{enumerate}
+\end{statement}
+
+\begin{proof}
+\end{proof}
+
+\begin{statement}{7}
+  Pruebe que $(\BR^m, \mathcal{L}, m)$ es la compleción de
+  $(\BR^m, \mathcal{B}, m |_{\mathcal{B}})$:
+  \begin{enumerate}
+    \item Pruebe que para todo $A \in \mathcal{L}$ existe $B \in G_{\delta}$
+    tal que $m(A) = m(B)$.
+    \item Concluya que $(\BR^m, \mathcal{L}, m)$ es la compleci\'on de
+    $(\BR^m, \mathcal{B}, m |_{\mathcal{B}})$.
+  \end{enumerate}
+\end{statement}
+
+\begin{proof}
+\end{proof}
+
+\begin{statement}{8}
+  Sea $E \subset \BR^m$ un conjunto no vac\'io y $(A_n)_{n \in \BN}$ la
+  sucesi\'on de abiertos
+  \[
+    A_n = \left\{x : d(x, E) < \frac{1}{n}\right\}.
+  \]
+  Demuestre lo siguiente:
+  \begin{enumerate}
+    \item Si $E$ es compacto, entonces $m(E) = \lim_{n \to \infty} m(A_n)$.
+    \item La proposicion (1) no siempre es verdadera.
+    % E cerrado mas no acotado
+    % E acotado mas no cerrado
+  \end{enumerate}
+\end{statement}
+
+\begin{proof}
+\end{proof}
+
+\begin{statement}{9}
+  Sea $E \subset \BR^m$ Lesbesgue medible. Muestre que
+  \[
+    m(E) = \sup_{\substack{K \subset E \\ K \text{ es compacto}}}  m(K).
+  \]
+\end{statement}
+
+\begin{proof}
+\end{proof}
+
+\begin{statement}{10}
+  Sean $E_1$ y $E_2$ dos compactos en $\BR$ tales que $E_1 \subset E_2$.
+  Sean $a$ y $b$ dos n\'umeros no negativos tales que
+  $a = m(E_1)$ y $b = m(E_2)$. Demuestre que para todo $c \in (a, b)$ existe
+  un compacto $E$ tal que $E_1 \subset E \subset E_2$ y $m(E) = c$.
+\end{statement}
+
+\begin{proof}
+\end{proof}
+
+\begin{statement}{11}
+  Sea $X \subset \BR^m$ un conjunto cuya frontera $\partial X$ tiene
+  medida de Lebesgue nula.
+  \begin{enumerate}
+    \item Pruebe que $X$ es Lebesgue medible.
+    \item Pruebe que $m(X) = m(\text{int}(X)) = m(\bar{X})$.
+  \end{enumerate}
+\end{statement}
+
+\begin{proof}
+\end{proof}
+
+\begin{statement}{12}
+  Sea $X$ un conjunto y $\mathcal{F}$ una colecci\'on sobre $X$.
+  Pruebe que las siguientes afirmaciones son equivalentes:
+  \begin{enumerate}
+    \item La colecci\'on $\mathcal{F}$ es un $\sigma$-\'algebra.
+    \item La colecci\'on $\mathcal{F}$ es un $\pi$-sistema y un $\lambda$-sistema.
+  \end{enumerate}
+\end{statement}
+
+\begin{proof}
+\end{proof}
+
+\begin{statement}{13}
+  Sea $\epsilon$ un n\'umero positivo tal que $0 < \epsilon < 1$.
+  \begin{enumerate}
+    \item Construya un abierto denso $E \subset [0, 1]$ tal que $m(E) = \epsilon$.
+    \item Construya un cerrado $F$ que no contenga ning\'un abierto no vac\'io
+    tal que $m(F) = \epsilon$.
+  \end{enumerate}
+\end{statement}
+
+\begin{proof}
+\end{proof}
+
+\begin{statement}{14}
+  Sea $X$ un conjunto y $H$ una colecci\'on sobre $X$. Pruebe que las siguientes
+  afirmaciones son equivalentes:
+  \begin{enumerate}
+    \item La colecci\'on $H$ es un $\lambda$-sistema.
+    \item La colecci\'on $H$ satisface lo siguiente:
+    \begin{enumerate}
+      \item $X \in H$.
+      \item Si $D \in H$, entonces $D^C \in H$.
+      \item Si $(D_n)_{n \in \BN}$ est\'a en $H$ y es disjunta dos a dos,
+      entonces $\cup_{n \in \BN} D_n \in H$.
+    \end{enumerate}
+  \end{enumerate}
+\end{statement}
+
+\begin{proof}
+\end{proof}
+
+\end{document}
