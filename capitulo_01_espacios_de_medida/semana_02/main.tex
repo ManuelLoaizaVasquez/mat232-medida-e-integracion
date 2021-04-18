@@ -11,6 +11,10 @@
 \newenvironment{statement}[1]{\smallskip\noindent\color[rgb]{1.00,0.00,0.50} {\bf #1.}}{}
 \allowdisplaybreaks[1]
 
+% Suelo y techo
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
 % Comandos para teoremas, definiciones, ejemplos, lemas, etc. para sus respectivos body types.
 \renewcommand*{\proofname}{Prueba}
 \renewcommand{\contentsname}{Contenido}
@@ -122,6 +126,65 @@ Primero probemos el siguiente lema.
 \end{statement}
 
 \begin{proof}
+  Primero probemos este lema:
+  \begin{lemma}
+    Se cumple que $\mathcal{B}_m = \sigma(\mathcal{J}_{m, q}^o)$.
+  \end{lemma}
+  \begin{proof}
+    Probar que $\sigma(\mathcal{J}_{m, q}^o) \subset \mathcal{B}_m = \sigma(\mathcal{O}_m)$
+    es sencillo puesto que todo intervalo abierto con extremos racionales es un
+    conjunto abierto.
+    ahora probemos que $\mathcal{B}_m = \sigma(\mathcal{O}) \subset \sigma(\mathcal{J}_{m, q}^o)$.
+    Primero, definamos la caja $B_{q, r} = \prod_{i = 1}^m (q_i - r, q_i + r)$.
+    Dado un $o \in \mathcal{O}_m$ podemos escribir este como
+    $\cup_{x \in o} B_{x_q, r_q}$, uni\'on de bolas rectangulares con centro en
+    $x_q$ y radio $r_q$. Este $x_q$ es un punto racional tal que $x$ pertenece
+    a su bola y esta \'ultima est\'a contenida en $o$. Este punto $x_q$ y radio
+    $r_q$ podemos conseguirlos siempre por la densidad de $\BQ_m$ en $\BR_m$.
+    Luego, tenemos $\{B_{x_q, r_q} : x \in o\} \subset \{B_{q, r} : q \in \BQ^m \text{ y } r \in \BQ\}$.
+    y este \'ultimo conjunto es numerable, por lo que el primer conjunto no le queda de otra
+    que ser numerable. De esta manera, hemos escrito al conjunto $o$ como una uni\'on enumerable
+    de conjuntos en $\sigma(\mathcal{J}_{m, q}^o)$, por lo que tendr\'iamos
+    $\mathcal{B}_m = \sigma(\mathcal{O}) \subset \sigma(\mathcal{J}_{m, q}^o)$.
+  \end{proof}
+  Ahora probemos el siguiente lema:
+  \begin{lemma}
+    Se cumple que $\sigma(\mathcal{J}_{m, q}) = \sigma(\mathcal{J}_{m, q}^o)$.
+  \end{lemma}
+  \begin{proof}
+    Probemos que $\sigma(\mathcal{J}_{m, q}) \subset \sigma(\mathcal{J}_{m, q}^o)$.
+    Sea $j = \prod_{i = 1}^m [l_i, r_i) \in \mathcal{J}_{m, q}$,
+    con $l_i, r_i \in \BQ$ y $1 \leq i \leq m$.
+    Tenemos que $j$ puede ser escrito como una intersecci\'on enumerable de
+    elementos en $\sigma(\mathcal{J}_{m, q}^o)$, pues
+    \[
+      \bigcap_{n \in \BN} \left(l_i - \frac{1}{n}, r_i\right) = [l_i, r_i)
+    \]
+    por lo que $\sigma(\mathcal{J}_{m, q}) \subset \sigma(\mathcal{J}_{m, q}^o)$.
+    Ahora probemos la otra direcci\'on.
+    Sea $j = \prod_{i = 1}^m (l_i, r_i) \in \mathcal{J}_{m, q}^o$,
+    con $l_i, r_i \in \BQ$ y $1 \leq i \leq m$.
+    Tenemos que $j$ puede ser escrito como una uni\'on enumerable de elementos
+    en $\sigma(\mathcal{J}_{m, q})$, pues
+    \[
+      \bigcup_{n \in \BN} \left[l_i + \frac{1}{n + \floor*{\frac{1}{r_i - l_i}}}, r_i\right) = (l_i, r_i)
+    \]
+    por lo que $\sigma(\mathcal{J}_{m, q}^o) \subset \sigma(\mathcal{J}_{m, q})$.
+    Finalmente, podemos concluir con $\sigma(\mathcal{J}_{m, q}) = \sigma(\mathcal{J}_{m, q}^o)$.
+  \end{proof}
+  De manera an\'aloga a este \'ultimo lema tenemos $\sigma(\mathcal{J}_m) = \sigma(\mathcal{J}_m^o)$.
+  Finalmente. como
+  \begin{gather*}
+    \sigma(\mathcal{J}_{m, q}^o) \subset \sigma(\mathcal{J}_m^o) \subset \sigma(\mathcal{O})
+    \subset \sigma(\mathcal{J}_{m, q}^o)\\
+    \sigma(\mathcal{J}_{m, q}^o) = \sigma(\mathcal{J}_{m, q})\\
+    \sigma(\mathcal{J}_m) = \sigma(\mathcal{J}_m^o)
+  \end{gather*}
+  entonces podemos concluir que
+  \[
+    \mathcal{B}_m = \sigma(\mathcal{J}_m) = \sigma(\mathcal{J}_m^o) =
+    \sigma(\mathcal{J}_{m, q}^o) = \sigma(\mathcal{J}_{m, q}).
+  \]
 \end{proof}
 
 \begin{statement}{3}
@@ -163,16 +226,16 @@ Primero probemos el siguiente lema.
   \begin{enumerate}
     \item La familia de subconjuntos de $X$
     \[
-      \widetilde{\mathcal{F}}= \{A = B \cup E : B \in \mathcal{F} \text{ y } E \in N\}  
+      \bar{\mathcal{F}}= \{A = B \cup E : B \in \mathcal{F} \text{ y } E \in N\}  
     \]
     es un $\sigma$-\'algebra sobre $X$ que contiene a $\mathcal{F}$.
     \item Si $B_1, B_2 \in \mathcal{F}$ y $E_1, E_2 \in N$ son tales que
     que $B_1 \cup E_1 = B_2 \cup E_2$, entonces $\mu(B_1) = \mu(B_2)$.
-    \item Existe una \'unica medida $\widetilde{\mu}$ en el espacio medible
-    $(X, \widetilde{\mathcal{F}})$ que extiende a $\mu$; es decir,
-    $\widetilde{\mu}(A) = \mu(A)$ para todo $A \in \mathcal{F}$.
+    \item Existe una \'unica medida $\bar{\mu}$ en el espacio medible
+    $(X, \bar{\mathcal{F}})$ que extiende a $\mu$; es decir,
+    $\bar{\mu}(A) = \mu(A)$ para todo $A \in \mathcal{F}$.
   \end{enumerate}
-  Al espacio de medida $(X, \widetilde{\mathcal{F}}, \widetilde{\mu})$ se le
+  Al espacio de medida $(X, \bar{\mathcal{F}}, \bar{\mu})$ se le
   denomina la compleci\'on de $(X, \mathcal{F}, \mu)$.
 \end{statement}
 
@@ -200,12 +263,12 @@ Primero probemos el siguiente lema.
 
 \begin{statement}{7}
   Pruebe que $(\BR^m, \mathcal{L}, m)$ es la compleción de
-  $(\BR^m, \mathcal{B}, m |_{\mathcal{B}})$:
+  $(\BR^m, \mathcal{B}_m, m |_{\mathcal{B}})$:
   \begin{enumerate}
     \item Pruebe que para todo $A \in \mathcal{L}$ existe $B \in G_{\delta}$
     tal que $m(A) = m(B)$.
     \item Concluya que $(\BR^m, \mathcal{L}, m)$ es la compleci\'on de
-    $(\BR^m, \mathcal{B}, m |_{\mathcal{B}})$.
+    $(\BR^m, \mathcal{B}_m, m |_{\mathcal{B}})$.
   \end{enumerate}
 \end{statement}
 
